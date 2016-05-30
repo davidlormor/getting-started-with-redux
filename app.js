@@ -1,55 +1,17 @@
-// Counter
-const counter = (state = 0, action) => {
-  if (typeof state === 'undefined') {
-    return 0
-  }
+import { reject } from 'lodash'
 
-  switch (action.type) {
-    case 'INCREMENT':
-      return state + 1
-    case 'DECREMENT':
-      return state -1
-    default:
-      return state
-  }
+export const addCounter = (list) => {
+  return [...list, 0]
 }
 
-// React
-import React from 'react'
-import ReactDOM from 'react-dom'
-
-const Counter = ({
-  value,
-  onIncrement,
-  onDecrement
-}) => (
-  <div>
-    <h1>{value}</h1>
-    <button onClick={onIncrement}>+</button>
-    <button onClick={onDecrement}>-</button>
-  </div>
-)
-
-const render = () => {
-  ReactDOM.render(
-    <Counter
-      value={store.getState()}
-      onIncrement={() =>
-        store.dispatch({type: 'INCREMENT'})
-      }
-      onDecrement={() =>
-        store.dispatch({type: 'DECREMENT'})
-      }
-    />,
-    document.getElementById('app')
-  )
+export const removeCounter = (list, index) => {
+  return reject(list, (v, i) => index === i)
 }
 
-// Store
-import { createStore } from 'redux'
-
-const store = createStore(counter)
-
-store.subscribe(render)
-
-render()
+export const incrementCounter = (list, index) => {
+  return [
+    ...list.slice(0, index),
+    list[index] + 1,
+    ...list.slice(index + 1)
+  ]
+}

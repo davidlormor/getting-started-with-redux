@@ -1,31 +1,48 @@
 import expect from 'expect'
+import deepFreeze from 'deep-freeze'
 
-import counter from './app'
+import {
+  addCounter,
+  incrementCounter,
+  removeCounter
+} from './app'
 
-describe('counter', function () {
-  it ('works', function () {
-    expect(
-      counter(0, {type: 'INCREMENT'})
-    ).toEqual(1)
+describe('addCounter', function () {
+  it ('adds a counter', function () {
+    const listBefore = []
+    const listAfter = [0]
 
-    expect(
-      counter(1, {type: 'INCREMENT'})
-    ).toEqual(2)
-
-    expect(
-      counter(2, {type: 'DECREMENT'})
-    ).toEqual(1)
+    deepFreeze(listBefore)
 
     expect(
-      counter(1, {type: 'DECREMENT'})
-    ).toEqual(0)
+      addCounter(listBefore)
+    ).toEqual(listAfter)
+  })
+})
+
+describe('removeCounter', function () {
+  it('removes the counter', function () {
+    const listBefore = [0, 10, 20]
+    const listAfter = [0, 20]
+
+    deepFreeze(listBefore)
 
     expect(
-      counter(1, {type: 'OTHER'})
-    ).toEqual(1)
+      removeCounter(listBefore, 1)
+    ).toEqual(listAfter)
+  })
+})
+
+
+describe('incrementCounter', function () {
+  it('increments the given counter', function () {
+    const listBefore = [0, 10, 20]
+    const listAfter = [0, 11, 20]
+
+    deepFreeze(listBefore)
 
     expect(
-      counter(undefined, {})
-    ).toEqual(0)
+      incrementCounter(listBefore, 1)
+    ).toEqual(listAfter)
   })
 })
