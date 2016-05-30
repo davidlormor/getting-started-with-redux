@@ -1,5 +1,5 @@
 // Counter
-export const counter = (state = 0, action) => {
+const counter = (state = 0, action) => {
   if (typeof state === 'undefined') {
     return 0
   }
@@ -14,39 +14,42 @@ export const counter = (state = 0, action) => {
   }
 }
 
-// Store
-const createStore = (reducer) => {
-  let state
-  let listeners = []
+// React
+import React from 'react'
+import ReactDOM from 'react-dom'
 
-  const getState = () => state
+const Counter = ({
+  value,
+  onIncrement,
+  onDecrement
+}) => (
+  <div>
+    <h1>{value}</h1>
+    <button onClick={onIncrement}>+</button>
+    <button onClick={onDecrement}>-</button>
+  </div>
+)
 
-  const dispatch = (action) => {
-    state = reducer(state, action)
-    listeners.forEach(listener => listener())
-  }
-
-  const subscribe = (listener) => {
-    listeners.push(listener)
-    return () => {
-      listeners = listeners.filter((l) => l !== listener)
-    }
-  }
-
-  dispatch({})
-
-  return { getState, dispatch, subscribe }
+const render = () => {
+  ReactDOM.render(
+    <Counter
+      value={store.getState()}
+      onIncrement={() =>
+        store.dispatch({type: 'INCREMENT'})
+      }
+      onDecrement={() =>
+        store.dispatch({type: 'DECREMENT'})
+      }
+    />,
+    document.getElementById('app')
+  )
 }
+
+// Store
+import { createStore } from 'redux'
 
 const store = createStore(counter)
 
-const render = () => {
-  document.body.innerText = store.getState()
-}
-
 store.subscribe(render)
-render()
 
-document.addEventListener('click', () => {
-  store.dispatch({ type: 'INCREMENT' })
-})
+render()
