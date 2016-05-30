@@ -1,5 +1,4 @@
-import expect from 'expect'
-
+// Counter
 const counter = (state = 0, action) => {
   if (typeof state === 'undefined') {
     return 0
@@ -15,30 +14,18 @@ const counter = (state = 0, action) => {
   }
 }
 
-describe('counter', function () {
-  it ('works', function () {
-    expect(
-      counter(0, {type: 'INCREMENT'})
-    ).toEqual(1)
+// Store
+import { createStore } from 'redux'
 
-    expect(
-      counter(1, {type: 'INCREMENT'})
-    ).toEqual(2)
+const store = createStore(counter)
 
-    expect(
-      counter(2, {type: 'DECREMENT'})
-    ).toEqual(1)
+const render = () => {
+  document.body.innerText = store.getState()
+}
 
-    expect(
-      counter(1, {type: 'DECREMENT'})
-    ).toEqual(0)
+store.subscribe(render)
+render()
 
-    expect(
-      counter(1, {type: 'OTHER'})
-    ).toEqual(1)
-
-    expect(
-      counter(undefined, {})
-    ).toEqual(0)
-  })
+document.addEventListener('click', () => {
+  store.dispatch({ type: 'INCREMENT' })
 })
