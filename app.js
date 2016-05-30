@@ -1,5 +1,5 @@
 // Counter
-const counter = (state = 0, action) => {
+export const counter = (state = 0, action) => {
   if (typeof state === 'undefined') {
     return 0
   }
@@ -15,7 +15,28 @@ const counter = (state = 0, action) => {
 }
 
 // Store
-import { createStore } from 'redux'
+const createStore = (reducer) => {
+  let state
+  let listeners = []
+
+  const getState = () => state
+
+  const dispatch = (action) => {
+    state = reducer(state, action)
+    listeners.forEach(listener => listener())
+  }
+
+  const subscribe = (listener) => {
+    listeners.push(listener)
+    return () => {
+      listeners = listeners.filter((l) => l !== listener)
+    }
+  }
+
+  dispatch({})
+
+  return { getState, dispatch, subscribe }
+}
 
 const store = createStore(counter)
 

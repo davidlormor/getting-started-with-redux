@@ -1,5 +1,7 @@
 import expect from 'expect'
 
+import counter from './app'
+
 describe('counter', function () {
   it ('works', function () {
     expect(
