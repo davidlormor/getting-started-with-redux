@@ -5,6 +5,14 @@ export const todos = (state = [], action) => {
         ...state,
         newTodo(action)
       ]
+    case 'TOGGLE_TODO':
+      return state.map((todo) => {
+        if (todo.id !== action.id) {
+          return todo
+        }
+
+        return toggle(todo)
+      })
     default:
       return state
   }
@@ -12,4 +20,11 @@ export const todos = (state = [], action) => {
 
 const newTodo = ({ id, text, completed = false }) => {
   return { id, text, completed }
+}
+
+const toggle = (todo) => {
+  return {
+    ...todo,
+    completed: !todo.completed
+  }
 }
