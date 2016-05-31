@@ -1,24 +1,15 @@
-import { reject } from 'lodash'
-
-export const addCounter = (list) => {
-  return [...list, 0]
-}
-
-export const removeCounter = (list, index) => {
-  return reject(list, (v, i) => index === i)
-}
-
-export const incrementCounter = (list, index) => {
-  return [
-    ...list.slice(0, index),
-    list[index] + 1,
-    ...list.slice(index + 1)
-  ]
-}
-
-export const toggleTodo = (todo) => {
-  return {
-    ...todo,
-    completed: !todo.completed
+export const todos = (state = [], action) => {
+  switch (action.type) {
+    case 'ADD_TODO':
+      return [
+        ...state,
+        newTodo(action)
+      ]
+    default:
+      return state
   }
+}
+
+const newTodo = ({ id, text, completed = false }) => {
+  return { id, text, completed }
 }
