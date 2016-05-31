@@ -15,3 +15,10 @@ export const incrementCounter = (list, index) => {
     ...list.slice(index + 1)
   ]
 }
+
+export const toggleTodo = (todo) => {
+  return {
+    ...todo,
+    completed: !todo.completed
+  }
+}

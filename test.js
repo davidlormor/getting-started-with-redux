@@ -4,7 +4,8 @@ import deepFreeze from 'deep-freeze'
 import {
   addCounter,
   incrementCounter,
-  removeCounter
+  removeCounter,
+  toggleTodo
 } from './app'
 
 describe('addCounter', function () {
@@ -44,5 +45,26 @@ describe('incrementCounter', function () {
     expect(
       incrementCounter(listBefore, 1)
     ).toEqual(listAfter)
+  })
+})
+
+describe('toggleTodo', function () {
+  it("it toggles a todo's 'completed' attribute", function () {
+    const todoBefore = {
+      id: 0,
+      text: 'Learn Redux',
+      completed: false
+    }
+    const todoAfter = {
+      id: 0,
+      text: 'Learn Redux',
+      completed: true
+    }
+
+    deepFreeze(todoBefore)
+
+    expect(
+      toggleTodo(todoBefore)
+    ).toEqual(todoAfter)
   })
 })
