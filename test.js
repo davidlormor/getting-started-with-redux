@@ -1,7 +1,7 @@
 import expect from 'expect'
 import deepFreeze from 'deep-freeze'
 
-import { todos } from './app'
+import todos from './modules/todos/reducer'
 
 describe('Reducers | todos', function () {
   it('adds a todo', function () {

@@ -4,9 +4,9 @@
   "description": "Getting Started with Redux course on egghead.io",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server",
-    "test": "mocha --compilers js:babel-register -w test",
-    "babel-node": "babel-node"
+    "start": "babel-node app.js",
+    "serve": "webpack-dev-server",
+    "test": "mocha --compilers js:babel-register -w test"
   },
   "author": "",
   "license": "ISC",
