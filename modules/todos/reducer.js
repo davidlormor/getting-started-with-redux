@@ -5,15 +5,11 @@ export default (todos = [], action) => {
     case 'ADD_TODO':
       return [
         ...todos,
-        newTodo(action)
+        todo(null, action)
       ]
     case 'TOGGLE_TODO':
       return todos.map((t) => todo(t, action))
     default:
       return todos
   }
-}
-
-const newTodo = ({ id, text, completed = false }) => {
-  return { id, text, completed }
 }
