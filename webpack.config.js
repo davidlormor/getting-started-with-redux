@@ -1,5 +1,11 @@
+const webpack = require('webpack')
+
 module.exports = {
-  entry: './app.js',
+  entry: [
+    'webpack-dev-server/client?http://0.0.0.0:8080',
+    'webpack/hot/only-dev-server',
+    './app.js'
+  ],
   output: {
     path: __dirname,
     filename: 'bundle.js'
@@ -9,8 +15,11 @@ module.exports = {
       {
         test: /.js$/,
         exclude: /node_modules/,
-        loader: 'babel'
+        loaders: ['react-hot', 'babel']
       }
     ]
-  }
+  },
+  plugins: [
+    new webpack.HotModuleReplacementPlugin()
+  ]
 }
