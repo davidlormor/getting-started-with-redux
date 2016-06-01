@@ -6,6 +6,6 @@ import store from './store'
 import App from './modules/app/component'
 
 render(
-  <App {...store.getState()} />,
+  <App store={store}/>,
   document.getElementById('app')
 )

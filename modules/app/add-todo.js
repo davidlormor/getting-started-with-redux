@@ -1,11 +1,10 @@
 import React from 'react'
 
-import store from '../../store'
-
 let nextTodoId = 0
 
 const AddTodo = ({
-  onAddClick
+  onAddClick,
+  store
 }) => {
   let input;
 

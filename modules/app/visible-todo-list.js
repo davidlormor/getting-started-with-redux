@@ -2,11 +2,11 @@ import React, { Component } from 'react'
 
 import TodoList from './todo-list'
 
-import store from '../../store'
 import { getVisibleTodos } from './helpers'
 
 class VisibleTodoList extends Component {
   componentDidMount () {
+    const { store } = this.props
     this.unsubscribe = store.subscribe(() => this.forceUpdate())
   }
 
@@ -15,6 +15,7 @@ class VisibleTodoList extends Component {
   }
 
   render () {
+    const { store } = this.props
     const { todos, visibilityFilter } = store.getState()
     const visibleTodos = getVisibleTodos(todos, visibilityFilter)
 
