@@ -7,7 +7,7 @@ import App from './modules/app/component'
 
 const renderApp = () => {
   render(
-    <App todos={store.getState().todos} />,
+    <App {...store.getState()} />,
     document.getElementById('app')
   )
 }
